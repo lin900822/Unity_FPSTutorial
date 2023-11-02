@@ -57,7 +57,7 @@ public class PlayerController : NetworkBehaviour
 
         transform.rotation = Quaternion.Euler(0, (float)_yaw, 0);
 
-        var cameraEulerAngle = _camera.transform.localRotation.eulerAngles;
+        var cameraEulerAngle = _camera.transform.rotation.eulerAngles;
         _camera.transform.rotation = Quaternion.Euler((float)_pitch, cameraEulerAngle.y, cameraEulerAngle.z);
     }
 

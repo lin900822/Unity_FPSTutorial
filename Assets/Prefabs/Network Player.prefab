@@ -267,6 +267,7 @@ GameObject:
   - component: {fileID: 3384580483878139127}
   - component: {fileID: 7066390587116112422}
   - component: {fileID: 5028098927000818135}
+  - component: {fileID: 8698641825785713208}
   m_Layer: 0
   m_Name: Network Player
   m_TagString: Untagged
@@ -314,6 +315,7 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 3384580483878139127}
   - {fileID: 5028098927000818135}
+  - {fileID: 8698641825785713208}
   SimulationBehaviours: []
 --- !u!114 &3384580483878139127
 MonoBehaviour:
@@ -328,6 +330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
+  _inputHandler: {fileID: 8698641825785713208}
   _characterController: {fileID: 5028098927000818135}
   _visuals:
   - {fileID: 6771928035374805659}
@@ -396,6 +399,20 @@ MonoBehaviour:
   rotationSpeed: 15
   _IsGrounded: 0
   _Velocity: {x: 0, y: 0, z: 0}
+--- !u!114 &8698641825785713208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6817667996768281174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e3bbac0d1834e839cfd800a3c1b77df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
+  _mouseSensitivity: 10
 --- !u!1 &9008993997252990878
 GameObject:
   m_ObjectHideFlags: 0

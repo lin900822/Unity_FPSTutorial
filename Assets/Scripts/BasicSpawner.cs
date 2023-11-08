@@ -8,9 +8,6 @@ using UnityEngine.SceneManagement;
 public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 {
     [SerializeField] 
-    private float _mouseSensitivity = 10f;
-    
-    [SerializeField] 
     private NetworkRunner _networkRunner = null;
     
     [SerializeField] 
@@ -55,19 +52,6 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
-        var inputData = new InputData();
-
-        if (Input.GetKey(KeyCode.W)) { inputData.MoveInput += Vector2.up; }
-        if (Input.GetKey(KeyCode.S)) { inputData.MoveInput += Vector2.down; }
-        if (Input.GetKey(KeyCode.A)) { inputData.MoveInput += Vector2.left; }
-        if (Input.GetKey(KeyCode.D)) { inputData.MoveInput += Vector2.right; }
-
-        inputData.Pitch = Input.GetAxis("Mouse Y") * _mouseSensitivity * (-1);
-        inputData.Yaw   = Input.GetAxis("Mouse X") * _mouseSensitivity;
-
-        inputData.Button.Set(InputButton.Jump, Input.GetKey(KeyCode.Space));
-
-        input.Set(inputData);
     }
 
     public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input)

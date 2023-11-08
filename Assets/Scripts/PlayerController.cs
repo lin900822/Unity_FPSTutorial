@@ -4,6 +4,8 @@ using UnityEngine;
 public class PlayerController : NetworkBehaviour
 {   
     [SerializeField]
+    private InputHandler _inputHandler;
+    [SerializeField]
     private NetworkCharacterControllerPrototype _characterController;
     [SerializeField]
     private MeshRenderer[] _visuals;
@@ -74,5 +76,27 @@ public class PlayerController : NetworkBehaviour
         {
             _pitch = 89;
         }
+    }
+
+    public override void Render()
+    {
+        if (!Object.HasInputAuthority) return;
+
+        var yaw = (float)(_yaw + _inputHandler.YawInput);
+        transform.rotation = Quaternion.Euler(0, yaw, 0);
+
+        var cameraEulerAngle = _camera.transform.rotation.eulerAngles;
+
+        var pitch = (float)(_pitch + _inputHandler.PitchInput);
+        if (pitch >= 180 && pitch <= 270)
+        {
+            pitch = 271;
+        }
+        else if (pitch <= 180 && pitch >= 90)
+        {
+            pitch = 89;
+        }
+
+        _camera.transform.rotation = Quaternion.Euler(pitch, cameraEulerAngle.y, cameraEulerAngle.z);
     }
 }

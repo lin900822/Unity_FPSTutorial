@@ -2,7 +2,9 @@
 using UnityEngine;
 
 public class PlayerController : NetworkBehaviour
-{   
+{
+    [SerializeField]
+    private AnimationHandler _animationHandler;
     [SerializeField]
     private InputHandler _inputHandler;
     [SerializeField]
@@ -55,6 +57,8 @@ public class PlayerController : NetworkBehaviour
             {
                 _characterController.Jump();
             }
+            
+            _animationHandler.PlayAnimation(data.MoveInput);
         }
 
         transform.rotation = Quaternion.Euler(0, (float)_yaw, 0);

@@ -4,6 +4,8 @@ using UnityEngine;
 public class PlayerController : NetworkBehaviour
 {
     [SerializeField]
+    private Transform _upperBodyTarget;
+    [SerializeField]
     private AnimationHandler _animationHandler;
     [SerializeField]
     private InputHandler _inputHandler;
@@ -64,7 +66,7 @@ public class PlayerController : NetworkBehaviour
         transform.rotation = Quaternion.Euler(0, (float)_yaw, 0);
 
         var cameraEulerAngle = _camera.transform.rotation.eulerAngles;
-        _camera.transform.rotation = Quaternion.Euler((float)_pitch, cameraEulerAngle.y, cameraEulerAngle.z);
+        _upperBodyTarget.rotation = Quaternion.Euler((float)_pitch, cameraEulerAngle.y, cameraEulerAngle.z);
     }
 
     private void HandlePitchYaw(InputData data)
@@ -101,6 +103,6 @@ public class PlayerController : NetworkBehaviour
             pitch = 89;
         }
 
-        _camera.transform.rotation = Quaternion.Euler(pitch, cameraEulerAngle.y, cameraEulerAngle.z);
+        _upperBodyTarget.rotation = Quaternion.Euler(pitch, cameraEulerAngle.y, cameraEulerAngle.z);
     }
 }

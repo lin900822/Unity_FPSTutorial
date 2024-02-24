@@ -505,6 +505,9 @@ GameObject:
   - component: {fileID: 5028098927000818135}
   - component: {fileID: 8698641825785713208}
   - component: {fileID: 1090792004238033094}
+  - component: {fileID: 5955504103281605688}
+  - component: {fileID: 977850651986718457}
+  - component: {fileID: 7477367767898969773}
   m_Layer: 0
   m_Name: Network Player
   m_TagString: Untagged
@@ -553,6 +556,8 @@ MonoBehaviour:
   - {fileID: 3384580483878139127}
   - {fileID: 5028098927000818135}
   - {fileID: 8698641825785713208}
+  - {fileID: 5955504103281605688}
+  - {fileID: 7477367767898969773}
   - {fileID: 6232135349629658705}
   SimulationBehaviours: []
 --- !u!114 &3384580483878139127
@@ -569,6 +574,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
   _upperBodyTarget: {fileID: 4846736173980813040}
+  _weaponHandler: {fileID: 7477367767898969773}
   _animationHandler: {fileID: 1090792004238033094}
   _inputHandler: {fileID: 8698641825785713208}
   _characterController: {fileID: 5028098927000818135}
@@ -664,6 +670,60 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 182832460623153325}
+--- !u!114 &5955504103281605688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6817667996768281174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1039544458, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
+  Config: 1
+  BroadRadius: 1
+  Offset: {x: 0, y: 1, z: 0}
+  GizmosColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  Hitboxes: []
+--- !u!114 &977850651986718457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6817667996768281174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1014831617, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 1
+  SphereRadius: 0
+  BoxExtents: {x: 0.5, y: 1, z: 0.5}
+  Offset: {x: 0, y: 1, z: 0}
+  Root: {fileID: 0}
+  GizmosColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+--- !u!114 &7477367767898969773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6817667996768281174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31bc57bac8fbbfc4f822b731c9639aec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
+  _cameraTrans: {fileID: 621292532399301460}
+  _hitLayer:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  _hitOptions: 11
 --- !u!1 &6997805775063297554
 GameObject:
   m_ObjectHideFlags: 0

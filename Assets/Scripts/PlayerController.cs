@@ -5,6 +5,9 @@ public class PlayerController : NetworkBehaviour
 {
     [SerializeField]
     private Transform _upperBodyTarget;
+
+    [SerializeField]
+    private WeaponHandler _weaponHandler;
     [SerializeField]
     private AnimationHandler _animationHandler;
     [SerializeField]
@@ -58,6 +61,10 @@ public class PlayerController : NetworkBehaviour
             if (buttonPressed.IsSet(InputButton.Jump))
             {
                 _characterController.Jump();
+            }
+            if (buttonPressed.IsSet(InputButton.Fire))
+            {
+                _weaponHandler.Fire();
             }
             
             _animationHandler.PlayAnimation(data.MoveInput);

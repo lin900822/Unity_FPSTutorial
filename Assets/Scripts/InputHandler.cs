@@ -41,6 +41,7 @@ public class InputHandler : NetworkBehaviour, IBeforeUpdate
         YawInput        = 0;
 
         inputData.Button.Set(InputButton.Jump, Input.GetKey(KeyCode.Space));
+        inputData.Button.Set(InputButton.Fire, Input.GetMouseButton(0));
         
         input.Set(inputData);
     }

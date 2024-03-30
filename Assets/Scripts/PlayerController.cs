@@ -1,5 +1,6 @@
 ﻿using Fusion;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : NetworkBehaviour
 {
@@ -8,25 +9,43 @@ public class PlayerController : NetworkBehaviour
 
     [SerializeField]
     private WeaponHandler _weaponHandler;
+
     [SerializeField]
     private AnimationHandler _animationHandler;
+
     [SerializeField]
     private InputHandler _inputHandler;
+
     [SerializeField]
     private NetworkCharacterControllerPrototype _characterController;
+
     [SerializeField]
     private MeshRenderer[] _visuals;
+
+    [SerializeField]
+    private Text _hpText;
+
     [SerializeField]
     private Camera _camera;
+
     [SerializeField]
     private float _speed = 5f;
+
+    [SerializeField]
+    private int _maxHp = 100;
+
     [Networked]
     private Angle _yaw { get; set; }
+
     [Networked]
     private Angle _pitch { get; set; }
+
     [Networked]
     private NetworkButtons _previousButton { get; set; }
-    
+
+    [Networked(OnChanged = nameof(HandleHpChanged))]
+    private int _hp { get; set; }
+
     public override void Spawned()
     {
         if (Object.HasInputAuthority)
@@ -38,12 +57,18 @@ public class PlayerController : NetworkBehaviour
             {
                 visual.enabled = false;
             }
+            
+            _hpText.gameObject.SetActive(true);
         }
         else
         {
             _camera.enabled                               = false;
             _camera.GetComponent<AudioListener>().enabled = false;
+            
+            _hpText.gameObject.SetActive(false);
         }
+
+        _hp = _maxHp;
     }
 
     public override void FixedUpdateNetwork()
@@ -62,11 +87,12 @@ public class PlayerController : NetworkBehaviour
             {
                 _characterController.Jump();
             }
+
             if (buttonPressed.IsSet(InputButton.Fire))
             {
                 _weaponHandler.Fire();
             }
-            
+
             _animationHandler.PlayAnimation(data.MoveInput);
         }
 
@@ -74,6 +100,11 @@ public class PlayerController : NetworkBehaviour
 
         var cameraEulerAngle = _camera.transform.rotation.eulerAngles;
         _upperBodyTarget.rotation = Quaternion.Euler((float)_pitch, cameraEulerAngle.y, cameraEulerAngle.z);
+
+        if (_hp <= 0)
+        {
+            Dead();
+        }
     }
 
     private void HandlePitchYaw(InputData data)
@@ -111,5 +142,26 @@ public class PlayerController : NetworkBehaviour
         }
 
         _upperBodyTarget.rotation = Quaternion.Euler(pitch, cameraEulerAngle.y, cameraEulerAngle.z);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        _hp -= damage;
+    }
+    
+    private void Dead()
+    {
+        _hp                                     = _maxHp;
+        _characterController.Transform.position = new Vector3(0, 5f, 0);
+    }
+
+    private static void HandleHpChanged(Changed<PlayerController> changed)
+    {
+        changed.Behaviour.UpdateHpText();
+    }
+    
+    private void UpdateHpText()
+    {
+        _hpText.text = $"{_hp}/{_maxHp}";
     }
 }

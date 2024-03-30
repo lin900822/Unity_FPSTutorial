@@ -4,6 +4,9 @@ using UnityEngine;
 public class WeaponHandler : NetworkBehaviour
 {
     [SerializeField]
+    private int _damage = 10;
+    
+    [SerializeField]
     private Transform _cameraTrans;
 
     [SerializeField]
@@ -24,7 +27,7 @@ public class WeaponHandler : NetworkBehaviour
         {
             if (hit.GameObject.TryGetComponent<PlayerController>(out var hitPlayerController))
             {
-                Debug.Log(hitPlayerController.gameObject.name);
+                hitPlayerController.TakeDamage(_damage);
             }
         }
     }
